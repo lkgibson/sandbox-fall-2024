@@ -12,19 +12,15 @@ public class Truck extends LandCraft {
         System.out.println("Truck is accelerating.");
     }
 
-    public void horn()
-
-    {
-
+    public void horn() {
         System.out.println("Truck is honking.");
-
     }
+
     @Override
-    public String toString()
-    {
-        final StringBuilder sb = new StringBuilder("Truck{");
-        sb.append("engineStarted=").append(engineStarted).append('}');
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Truck {");
+        sb.append("engineStarted=").append(engineStarted);
+        sb.append('}');
         return sb.toString();
     }
-
 }
