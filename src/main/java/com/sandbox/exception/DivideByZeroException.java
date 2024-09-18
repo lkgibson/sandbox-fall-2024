@@ -14,3 +14,4 @@ public class DivideByZeroException extends Exception
         super(message, cause);
     }
 }
+
