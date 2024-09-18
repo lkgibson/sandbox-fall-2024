@@ -25,6 +25,7 @@ public class Calculator {
     public static int divide(int a, int b)
     {
         int returnValue = 0;
+
         try
         {
             returnValue = a/b;
@@ -51,4 +52,5 @@ public class Calculator {
         System.out.println(divide(5,0));
         System.out.println(divide(5.0f, 0.0f));
     }
+
 }

@@ -3,12 +3,16 @@ package com.sandbox.exception;
 import java.util.Scanner;
 
 public class HelloException
+
 {
+
     public static void main(String[] args)
+
     {
 
         //try-catch
         try
+
         {
             // do something
         }
