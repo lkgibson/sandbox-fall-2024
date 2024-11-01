@@ -1,4 +1,4 @@
-package com.sandbox.comparable;
+/*package com.sandbox.comparable;
 
 public class Apple extends Fruit implements Comparable<Orange>
 {
@@ -81,3 +81,5 @@ public class Apple extends Fruit implements Comparable<Orange>
         return Integer.compare(this.size, orange.getSize());
     }
 }
+
+ */

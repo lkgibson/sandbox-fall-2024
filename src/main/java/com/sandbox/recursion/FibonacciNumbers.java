@@ -1,4 +1,4 @@
-package com.sandbox.algorithm;
+package com.sandbox.recursion;
 
 import java.util.HashMap;
 import java.util.Map;

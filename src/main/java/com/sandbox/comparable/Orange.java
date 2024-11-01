@@ -1,4 +1,4 @@
-package com.sandbox.comparable;
+/*package com.sandbox.comparable;
 
 public class Orange extends Fruit
 {
@@ -62,3 +62,5 @@ public class Orange extends Fruit
         return sb.toString();
     }
 }
+
+ */

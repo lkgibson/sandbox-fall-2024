@@ -56,7 +56,7 @@ public abstract class Fruit
         return sb.toString();
     }
 
-    @Override
+    /*@Override
     public int compareTo(Fruit that)
     {
         if (this.fruitName.compareTo(that.fruitName) > 0)
@@ -105,5 +105,6 @@ public abstract class Fruit
         Collections.sort(fruits);
 
         fruits.forEach(System.out::println);
+     */
     }
-}
+
