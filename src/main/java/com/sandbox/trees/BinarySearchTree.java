@@ -274,7 +274,7 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
 
     }
 
-    private Iterator<T>> Object insertionIterator()
+    /*private Iterator<T>> Object insertionIterator()
     {
 
         Queue<BinaryTreeNode<T>> tempList = new LinkedList<>();
@@ -282,6 +282,8 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
 
         return tempList.iterator();
     }
+
+     */
 
     private void levelOrderInsertionIterator(BinaryTreeNode<T> node, Queue<BinaryTreeNode<T>> tempList) {
 
