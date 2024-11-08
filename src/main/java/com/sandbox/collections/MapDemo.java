@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapDemo
-{
-    public static void main(String[] args)
-    {
+public class MapDemo {
+
+    public static void main(String[] args) {
+
         Map<Integer, String> map = new HashMap<>();
 
         map.put(1, "One");
@@ -25,5 +25,4 @@ public class MapDemo
 
         Map<Integer, ArrayList<Map<String, String>>> map2 = new HashMap<>();
     }
-
 }

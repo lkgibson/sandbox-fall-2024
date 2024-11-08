@@ -2,43 +2,34 @@ package com.sandbox.trees;
 
 import java.util.*;
 
-public class BinaryTree<T> implements Tree<T>
-{
+public class BinaryTree<T> implements Tree<T> {
 
     private BinaryTreeNode<T> root;
     private int count;
 
-    public BinaryTree()
-    {
+    public BinaryTree() {
         this.root = null;
         this.count = 0;
     }
 
     @Override
-    public boolean create()  // same as constructor, mostly.
-    {
+    public boolean create() {
         this.root = null;
         this.count = 0;
         return true;
     }
 
     @Override
-    public T insert(T element)
-    {
+    public T insert(T element) {
 
         T insertedElement = null;
-        if (this.root == null)
-        {
+        if (this.root == null) {
             this.root = new BinaryTreeNode<>(element);
-        }
-        else
-        {
+        } else {
             Iterator<BinaryTreeNode<T>> iterator = insertionIterator();
-            while (iterator.hasNext())
-            {
+            while (iterator.hasNext()) {
                 BinaryTreeNode<T> node = iterator.next();
-                if (node.element == null)
-                {
+                if (node.element == null) {
                     node.element = element;
                     insertedElement = node.element;
                     node.left = new BinaryTreeNode<>();
@@ -53,20 +44,17 @@ public class BinaryTree<T> implements Tree<T>
     }
 
     @Override
-    public T search(T targetElement) throws ElementNotFoundException
-    {
+    public T search(T targetElement) throws ElementNotFoundException {
         BinaryTreeNode<T> current = findNode(targetElement, root);
 
         if (current == null) throw new ElementNotFoundException(this.getClass()
-                                                                    .getCanonicalName());
+                .getCanonicalName());
 
         return (current.getElement());
     }
 
-    private BinaryTreeNode<T> findNode(T targetElement, BinaryTreeNode<T> next)
-    {
-        if (next == null)
-        {
+    private BinaryTreeNode<T> findNode(T targetElement, BinaryTreeNode<T> next) {
+        if (next == null) {
             return null;
         }
 
@@ -81,30 +69,23 @@ public class BinaryTree<T> implements Tree<T>
     }
 
     @Override
-    public boolean delete(T element)
-    {
+    public boolean delete(T element) {
 
         return delete(this.root, element);
     }
 
-    private boolean delete(BinaryTreeNode<T> root, T targetValue)
-    {
+    private boolean delete(BinaryTreeNode<T> root, T targetValue) {
 
-        if (root == null)
-        {
+        if (root == null) {
             return false;
         }
 
-        if (root.left.element == null && root.right.element == null)
-        {
+        if (root.left.element == null && root.right.element == null) {
 
-            if (root.element == targetValue)
-            {
+            if (root.element == targetValue) {
                 root.element = null;
                 return true;
-            }
-            else
-            {
+            } else {
                 return false;
             }
         }
@@ -116,36 +97,30 @@ public class BinaryTree<T> implements Tree<T>
 
         // Do level order traversal until
         // we find target node and last node.
-        while (!queue.isEmpty())
-        {
+        while (!queue.isEmpty()) {
 
             deepestNode = queue.peek();
             queue.remove();
 
-            if (deepestNode.element == targetValue)
-            {
+            if (deepestNode.element == targetValue) {
                 targetNode = deepestNode;
             }
 
-            if (deepestNode.left.element != null)
-            {
+            if (deepestNode.left.element != null) {
                 queue.add(deepestNode.left);
             }
 
-            if (deepestNode.right.element != null)
-            {
+            if (deepestNode.right.element != null) {
                 queue.add(deepestNode.right);
             }
         }
 
-        if (targetNode != null)
-        {
+        if (targetNode != null) {
 
             boolean deleteLast = deepestNode == targetNode;
             T x = deepestNode.element;
             deleteDeepest(this.root, deepestNode);
-            if (!deleteLast)
-            {
+            if (!deleteLast) {
                 // move last element to target node
                 targetNode.element = x;
             }
@@ -154,8 +129,7 @@ public class BinaryTree<T> implements Tree<T>
         return true;
     }
 
-    private void deleteDeepest(BinaryTreeNode<T> root, BinaryTreeNode<T> deleteNode)
-    {
+    private void deleteDeepest(BinaryTreeNode<T> root, BinaryTreeNode<T> deleteNode) {
 
         Queue<BinaryTreeNode<T>> queue = new LinkedList<>();
         queue.add(root);
@@ -163,46 +137,36 @@ public class BinaryTree<T> implements Tree<T>
         BinaryTreeNode<T> temp = null;
 
         // Do level order traversal until last node
-        while (!queue.isEmpty())
-        {
+        while (!queue.isEmpty()) {
 
             temp = queue.peek();
             queue.remove();
 
-            if (temp == deleteNode)
-            {
+            if (temp == deleteNode) {
                 temp.element = null;
                 temp.left = null;
                 temp.right = null;
                 return;
             }
 
-            if (temp.right != null)
-            {
-                if (temp.right == deleteNode)
-                {
+            if (temp.right != null) {
+                if (temp.right == deleteNode) {
                     temp.right.element = null;
                     temp.right.right = null;
                     temp.right.left = null;
                     return;
-                }
-                else
-                {
+                } else {
                     queue.add(temp.right);
                 }
             }
 
-            if (temp.left != null)
-            {
-                if (temp.left == deleteNode)
-                {
+            if (temp.left != null) {
+                if (temp.left == deleteNode) {
                     temp.left.element = null;
                     temp.left.right = null;
                     temp.left.left = null;
                     return;
-                }
-                else
-                {
+                } else {
                     queue.add(temp.left);
                 }
             }
@@ -210,53 +174,45 @@ public class BinaryTree<T> implements Tree<T>
     }
 
     @Override
-    public boolean contains(T targetElement)
-    {
+    public boolean contains(T targetElement) {
         boolean containsElement = false;
 
-        try
-        {
+        try {
             containsElement = search(targetElement) != null;
-        }
-        catch (ElementNotFoundException e)
-        {
+        } catch (ElementNotFoundException e) {
             System.err.println("Element not found");
         }
         return containsElement;
     }
 
     @Override
-    public boolean isEmpty()
-    {
+    public boolean isEmpty() {
         return this.count == 0;
     }
 
     @Override
-    public int size()
-    {
+    public int size() {
         return this.count;
     }
 
     @Override
-    public Iterator<T> iterator()
-    {
+    public Iterator<T> iterator() {
         return iteratorLevelOrder();
     }
 
     @Override
-    public Iterator<T> iteratorPreOrder()
-    {
-            Queue<T> tempList = new LinkedList<>();
-            preOrder(root, tempList);
+    public Iterator<T> iteratorPreOrder() {
 
-            return tempList.iterator();
+        Queue<T> tempList = new LinkedList<>();
+        preOrder(root, tempList);
+
+        return tempList.iterator();
     }
 
-    private void preOrder(BinaryTreeNode<T> node, Queue<T> tempList)
-    {
-        // Root -> Left -> Right (Pre Order)
-        if (node != null)
-        {
+    private void preOrder(BinaryTreeNode<T> node, Queue<T> tempList) {
+
+        // Root Left Right (Pre-order)
+        if (node != null) {
             tempList.add(node.getElement());
             preOrder(node.left, tempList);
             preOrder(node.right, tempList);
@@ -264,19 +220,18 @@ public class BinaryTree<T> implements Tree<T>
     }
 
     @Override
-    public Iterator<T> iteratorInOrder()
-    {
+    public Iterator<T> iteratorInOrder() {
+
         Queue<T> tempList = new LinkedList<>();
         inOrder(root, tempList);
 
         return tempList.iterator();
     }
 
-    private void inOrder(BinaryTreeNode<T> node, Queue<T> tempList)
-    {
-        // Left -> Root -> Right (In Order)
-        if (node != null)
-        {
+    private void inOrder(BinaryTreeNode<T> node, Queue<T> tempList) {
+
+        // Left Root Right (In-order)
+        if (node != null) {
             inOrder(node.left, tempList);
             tempList.add(node.getElement());
             inOrder(node.right, tempList);
@@ -284,19 +239,18 @@ public class BinaryTree<T> implements Tree<T>
     }
 
     @Override
-    public Iterator<T> iteratorPostOrder()
-    {
+    public Iterator<T> iteratorPostOrder() {
+
         Queue<T> tempList = new LinkedList<>();
         postOrder(root, tempList);
 
         return tempList.iterator();
     }
 
-    private void postOrder(BinaryTreeNode<T> node, Queue<T> tempList)
-    {
-        // Left -> Right -> Root (Post Order)
-        if (node != null)
-        {
+    private void postOrder(BinaryTreeNode<T> node, Queue<T> tempList) {
+
+        // Left Right Root (Post-order)
+        if (node != null) {
             postOrder(node.left, tempList);
             postOrder(node.right, tempList);
             tempList.add(node.getElement());
@@ -304,40 +258,37 @@ public class BinaryTree<T> implements Tree<T>
     }
 
     @Override
-    public Iterator<T> iteratorLevelOrder()
-    {
+    public Iterator<T> iteratorLevelOrder() {
+
         Queue<T> tempList = new LinkedList<>();
         levelOrder(root, tempList);
 
         return tempList.iterator();
     }
 
-    public void levelOrder(BinaryTreeNode<T> node, Queue<T> tempList)
-    {
+    public void levelOrder(BinaryTreeNode<T> node, Queue<T> tempList) {
+
         // temporary queue to hold the nodes
         Queue<BinaryTreeNode<T>> queue = new LinkedList<>();
         queue.add(node);
 
-        while (!queue.isEmpty())
-        {
+        while (!queue.isEmpty()) {
+
             BinaryTreeNode<T> tempNode = queue.poll();
             tempList.add(tempNode.getElement());
 
-            if (tempNode.left != null)
-            {
+            if (tempNode.left != null) {
                 queue.add(tempNode.left);
             }
 
-            if (tempNode.right != null)
-            {
+            if (tempNode.right != null) {
                 queue.add(tempNode.right);
             }
         }
 
     }
 
-    private Iterator<BinaryTreeNode<T>> insertionIterator()
-    {
+    private Iterator<BinaryTreeNode<T>> insertionIterator() {
 
         Queue<BinaryTreeNode<T>> tempList = new LinkedList<>();
         levelOrderInsertionIterator(root, tempList);
@@ -345,33 +296,28 @@ public class BinaryTree<T> implements Tree<T>
         return tempList.iterator();
     }
 
-    private void levelOrderInsertionIterator(BinaryTreeNode<T> node, Queue<BinaryTreeNode<T>> tempList)
-    {
+    private void levelOrderInsertionIterator(BinaryTreeNode<T> node, Queue<BinaryTreeNode<T>> tempList) {
 
         Queue<BinaryTreeNode<T>> queue = new LinkedList<>();
         queue.add(node);
 
-        while (!queue.isEmpty())
-        {
+        while (!queue.isEmpty()) {
 
             BinaryTreeNode<T> tempNode = queue.poll();
             tempList.add(tempNode);
 
-            if (tempNode.left != null)
-            {
+            if (tempNode.left != null) {
                 queue.add(tempNode.left);
             }
 
-            if (tempNode.right != null)
-            {
+            if (tempNode.right != null) {
                 queue.add(tempNode.right);
             }
 
         }
     }
 
-    public void printTopDownTree()
-    {
+    public void printTopDownTree() {
 
         List<List<String>> lines = new ArrayList<>();
         List<BinaryTreeNode<T>> level = new ArrayList<>();
@@ -382,32 +328,24 @@ public class BinaryTree<T> implements Tree<T>
 
         int widest = 0;
 
-        while (nn != 0)
-        {
+        while (nn != 0) {
 
             List<String> line = new ArrayList<>();
 
             nn = 0;
 
-            for (BinaryTreeNode<T> n : level)
-            {
+            for (BinaryTreeNode<T> n : level) {
 
-                if (n == null)
-                {
+                if (n == null) {
                     line.add(null);
                     next.add(null);
                     next.add(null);
-                }
-                else
-                {
+                } else {
                     String aa;
-                    if (n.getElement() != null)
-                    {
+                    if (n.getElement() != null) {
                         aa = n.getElement()
-                              .toString();
-                    }
-                    else
-                    {
+                                .toString();
+                    } else {
                         aa = "null";
                     }
                     line.add(aa);
@@ -433,50 +371,37 @@ public class BinaryTree<T> implements Tree<T>
         }
 
         int perPiece = lines.get(lines.size() - 1)
-                            .size() * (widest + 4);
-        for (int i = 0; i < lines.size(); i++)
-        {
+                .size() * (widest + 4);
+        for (int i = 0; i < lines.size(); i++) {
             List<String> line = lines.get(i);
             int hpw = (int) Math.floor(perPiece / 2f) - 1;
 
-            if (i > 0)
-            {
-                for (int j = 0; j < line.size(); j++)
-                {
+            if (i > 0) {
+                for (int j = 0; j < line.size(); j++) {
 
                     // split node
                     char c = ' ';
-                    if (j % 2 == 1)
-                    {
-                        if (line.get(j - 1) != null)
-                        {
+                    if (j % 2 == 1) {
+                        if (line.get(j - 1) != null) {
                             c = (line.get(j) != null) ? '|' : '|';
-                        }
-                        else
-                        {
+                        } else {
                             if (j < line.size() && line.get(j) != null) c = '|';
                         }
                     }
                     System.out.print(c);
 
                     // lines and spaces
-                    if (line.get(j) == null)
-                    {
-                        for (int k = 0; k < perPiece - 1; k++)
-                        {
+                    if (line.get(j) == null) {
+                        for (int k = 0; k < perPiece - 1; k++) {
                             System.out.print(" ");
                         }
-                    }
-                    else
-                    {
+                    } else {
 
-                        for (int k = 0; k < hpw; k++)
-                        {
+                        for (int k = 0; k < hpw; k++) {
                             System.out.print(j % 2 == 0 ? " " : "-");
                         }
                         System.out.print(j % 2 == 0 ? "|" : "|");
-                        for (int k = 0; k < hpw; k++)
-                        {
+                        for (int k = 0; k < hpw; k++) {
                             System.out.print(j % 2 == 0 ? "-" : " ");
                         }
                     }
@@ -485,8 +410,7 @@ public class BinaryTree<T> implements Tree<T>
             }
 
             // print line of numbers
-            for (int j = 0; j < line.size(); j++)
-            {
+            for (int j = 0; j < line.size(); j++) {
 
                 String f = line.get(j);
                 if (f == null) f = "";
@@ -494,13 +418,11 @@ public class BinaryTree<T> implements Tree<T>
                 int gap2 = (int) Math.floor(perPiece / 2f - f.length() / 2f);
 
                 // a number
-                for (int k = 0; k < gap1; k++)
-                {
+                for (int k = 0; k < gap1; k++) {
                     System.out.print(" ");
                 }
                 System.out.print(f);
-                for (int k = 0; k < gap2; k++)
-                {
+                for (int k = 0; k < gap2; k++) {
                     System.out.print(" ");
                 }
             }
@@ -510,39 +432,33 @@ public class BinaryTree<T> implements Tree<T>
         }
     }
 
-    private static class BinaryTreeNode<S>
-    {
+    private static class BinaryTreeNode<S> {
 
         BinaryTreeNode<S> left;
         BinaryTreeNode<S> right;
         S element;
 
-        BinaryTreeNode()
-        {
+        BinaryTreeNode() {
             this.element = null;
             this.left = null;
             this.right = null;
         }
 
-        BinaryTreeNode(S element)
-        {
+        BinaryTreeNode(S element) {
             this.element = element;
             this.left = new BinaryTreeNode<>();
             this.right = new BinaryTreeNode<>();
         }
 
-        S getElement()
-        {
+        S getElement() {
             return element;
         }
 
-        BinaryTreeNode<S> getLeft()
-        {
+        BinaryTreeNode<S> getLeft() {
             return left;
         }
 
-        BinaryTreeNode<S> getRight()
-        {
+        BinaryTreeNode<S> getRight() {
             return right;
         }
 

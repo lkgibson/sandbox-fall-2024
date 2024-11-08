@@ -1,18 +1,25 @@
 package com.sandbox.generics;
 
-public class IntegerBox
-{
+public class IntegerBox {
+
     private Integer contents;
 
-    /*public I()
-    {
+    public IntegerBox() {
+    }
 
-    } */
-
-    public Integer getContents()
-    {
+    public Integer getContents() {
         return contents;
     }
 
+    public void setContents(Integer contents) {
+        this.contents = contents;
+    }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Box{");
+        sb.append("contents=").append(contents);
+        sb.append('}');
+        return sb.toString();
+    }
 }

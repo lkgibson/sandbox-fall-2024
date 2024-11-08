@@ -7,29 +7,25 @@ public class FibonacciNumbers {
 
     private Map<Integer, Long> dictionary = new HashMap<>();
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
 
             FibonacciNumbers fn = new FibonacciNumbers();
 
-            for (int n = 0; n <= 92; n++)
-            {
+            for (int n = 0; n <= 92; n++) {
                 System.out.println("fib(" + n + ") = " + (fn.fib(n)));
             }
     }
 
-    // 0(2^n) amortized to 0(1) using memoization
+    // O(2^n) amortized to O(1) using memoization
     public long fib(int x) {
 
         // f0 = 0
-        if (x == 0)
-        {
+        if (x == 0) {
             return 0L;
         }
 
         // f1 = 1
-        if (x == 1)
-        {
+        if (x == 1) {
             return 1L;
         }
 
@@ -37,13 +33,11 @@ public class FibonacciNumbers {
         return memo(x - 1) + memo(x - 2);
     }
 
-    public long memo(int m)
-    {
+    public long memo(int m) {
 
         Long value = dictionary.get(m);
 
-        if (value != null)
-        {
+        if (value != null) {
             return value;
         }
 

@@ -72,38 +72,15 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
     }
 
     private BinaryTreeNode<T> findNode(T key, BinaryTreeNode<T> x) {
-       /*
-       Recurse-Tree-Search(s, key)
-       if x == NIL or key == x.key
-           return x
-         if key < x.key then
-           return Recurse-Tree-Search(x.left, key)
-         else
-         return Recurse-Tree-Search(x.right, key)
-         end if
-        */
 
         if (x == null || key == x.element) return x;
 
-        if (key.compareTo(x.element) < 0)
-        {
+        if (key.compareTo(x.element) < 0) {
             return findNode(key, x.left);
-        }
-        else
-        {
+        } else {
             return findNode(key, x.right);
         }
 
-        /*if (next == null) return null;
-
-        if (next.getElement()
-                .equals(targetElement)) return next;
-
-        BinaryTreeNode<T> temp = findNode(targetElement, next.getLeft());
-
-        if (temp == null) temp = findNode(targetElement, next.getRight());*/
-
-         // return x;
     }
 
     @Override
@@ -194,11 +171,10 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
         return tempList.iterator();
     }
 
-    private void preOrder(BinaryTreeNode<T> node, Queue<T> tempList)
-    {
-        // Root -> Left -> Right (Pre Order)
-        if (node != null)
-        {
+    private void preOrder(BinaryTreeNode<T> node, Queue<T> tempList) {
+
+        // Root Left Right (Pre-order)
+        if (node != null) {
             tempList.add(node.getElement());
             preOrder(node.left, tempList);
             preOrder(node.right, tempList);
@@ -213,11 +189,10 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
         return tempList.iterator();
     }
 
-    private void inOrder(BinaryTreeNode<T> node, Queue<T> tempList)
-    {
-    // Left -> Root -> Right (In Order)
-        if (node != null)
-        {
+    private void inOrder(BinaryTreeNode<T> node, Queue<T> tempList) {
+
+        // Left Root Right (In-order)
+        if (node != null) {
             inOrder(node.left, tempList);
             tempList.add(node.getElement());
             inOrder(node.right, tempList);
@@ -232,11 +207,10 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
         return tempList.iterator();
     }
 
-    private void postOrder(BinaryTreeNode<T> node, Queue<T> tempList)
-    {
-        // Left -> Right -> Root (Post Order)
-        if (node != null)
-        {
+    private void postOrder(BinaryTreeNode<T> node, Queue<T> tempList) {
+
+        // Left Right Root (Post-order)
+        if (node != null) {
             postOrder(node.left, tempList);
             postOrder(node.right, tempList);
             tempList.add(node.getElement());
@@ -252,48 +226,15 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
     }
 
     private void levelOrder(BinaryTreeNode<T> node, Queue<T> tempList) {
+
         // temporary queue to hold the nodes
-        Queue<BinaryTreeNode<T>> queue = new LinkedList<>();
-        queue.add(node);
-
-        while (!queue.isEmpty())
-        {
-            BinaryTreeNode<T> tempNode = queue.poll();
-            tempList.add(tempNode.getElement());
-
-            if (tempNode.left != null)
-            {
-                queue.add(tempNode.left);
-            }
-
-            if (tempNode.right != null)
-            {
-                queue.add(tempNode.right);
-            }
-        }
-
-    }
-
-    /*private Iterator<T>> Object insertionIterator()
-    {
-
-        Queue<BinaryTreeNode<T>> tempList = new LinkedList<>();
-        levelOrderInsertionIterator(root, tempList);
-
-        return tempList.iterator();
-    }
-
-     */
-
-    private void levelOrderInsertionIterator(BinaryTreeNode<T> node, Queue<BinaryTreeNode<T>> tempList) {
-
         Queue<BinaryTreeNode<T>> queue = new LinkedList<>();
         queue.add(node);
 
         while (!queue.isEmpty()) {
 
             BinaryTreeNode<T> tempNode = queue.poll();
-            tempList.add(tempNode);
+            tempList.add(tempNode.getElement());
 
             if (tempNode.left != null) {
                 queue.add(tempNode.left);
@@ -302,8 +243,8 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
             if (tempNode.right != null) {
                 queue.add(tempNode.right);
             }
-
         }
+
     }
 
     public void printTopDownTree() {

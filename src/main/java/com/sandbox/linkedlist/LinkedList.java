@@ -1,7 +1,7 @@
 package com.sandbox.linkedlist;
 
-public interface LinkedList<E>
-{
+public interface LinkedList<E> {
+
     void addFirst(E element);
     void addLast(E element);
 

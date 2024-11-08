@@ -1,18 +1,19 @@
 package com.sandbox.exception;
 
-public class DivideByZeroException extends Exception
-{
-    public DivideByZeroException()
-    {
+public class DivideByZeroException extends Exception {
+
+    public DivideByZeroException() {
     }
 
-    public DivideByZeroException(String message)
-    {
+    public DivideByZeroException(String message) {
         super(message);
     }
 
-    public DivideByZeroException(String message, Throwable cause)
-    {
+    public DivideByZeroException(String message, Throwable cause) {
         super(message, cause);
+    }
+
+    public DivideByZeroException(Throwable cause) {
+        super(cause);
     }
 }

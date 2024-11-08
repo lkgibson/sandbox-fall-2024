@@ -22,35 +22,27 @@ public class Calculator {
         return a * b;
     }
 
-    public static int divide(int a, int b)
-    {
-        int returnValue = 0;
+    public static int divide(int a, int b) {
+       int returnValue = 0;
+       try {
+           returnValue = a/b;
+       }  catch (ArithmeticException e) {
+           System.err.println("Can't divide by zero");
+       }
 
-        try
-        {
-            returnValue = a/b;
-        }
-        catch (ArithmeticException e)
-        {
-            System.err.println("Can't divide by zero");
-        }
-
-        return returnValue;
+       return returnValue;
     }
 
-    public static float divide(float a, float b) throws DivideByZeroException
-    {
-        if (b == 0)
-        {
+    public static float divide(float a, float b) throws DivideByZeroException {
+        if (b == 0.0) {
             throw new DivideByZeroException();
         }
-        return a/b;
+        return a / b;
     }
 
-    public static void main(String[] args) throws DivideByZeroException
-    {
+    public static void main(String[] args) throws DivideByZeroException {
         System.out.println(divide(5,0));
-        System.out.println(divide(5.0f, 0.0f));
-    }
+        System.out.println(divide(5.0f,0.0f));
 
+    }
 }

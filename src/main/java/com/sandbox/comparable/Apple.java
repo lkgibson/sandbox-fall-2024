@@ -1,85 +1,25 @@
-/*package com.sandbox.comparable;
+package com.sandbox.comparable;
 
-public class Apple extends Fruit implements Comparable<Orange>
-{
-    protected String type;
-    protected String color;
-    protected int size;
+public class Apple extends Fruit implements Comparable<Fruit> {
 
-    public Apple(String type, String color, int size)
-    {
-        super();
-        this.type = type;
-        this.color = color;
-        this.size = size;
-    }
 
-    public Apple()
-    {
-    }
-
-    public String getType()
-    {
-
-        return type;
-    }
-
-    public void setType(String type)
-    {
-
-        this.type = type;
-    }
-
-    public String getColor()
-    {
-
-        return color;
-    }
-
-    public void setColor(String color)
-    {
-
-        this.color = color;
-    }
-
-    public int getSize()
-    {
-
-        return size;
-    }
-
-    public void setSize(int size)
-    {
-
-        this.size = size;
+    public Apple(String type, String color, int size) {
+        super(type, color, size);
     }
 
     @Override
-    public String toString()
-    {
-        StringBuilder sb = new StringBuilder("Apple{");
-        sb.append("type='").append(type).append('\'');
-        sb.append(", color='").append(color).append('\'');
-        sb.append(", size=").append(size);
-        sb.append('}');
-        return sb.toString();
-    }
+    public int compareTo(Fruit fruit) {
 
-    @Override
-    public int compareTo(Orange orange)
-    {
-        int typeComparison = this.type.compareTo(orange.getType());
+        int typeComparison = this.type.compareTo(fruit.getType());
         if (typeComparison != 0) {
             return typeComparison;
         }
 
-        int colorComparison = this.color.compareTo(orange.getColor());
+        int colorComparison = this.color.compareTo(fruit.getColor());
         if (colorComparison != 0) {
             return colorComparison;
         }
 
-        return Integer.compare(this.size, orange.getSize());
+        return Integer.compare(this.size, fruit.getSize());
     }
 }
-
- */

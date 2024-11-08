@@ -2,97 +2,64 @@ package com.sandbox.exception;
 
 import java.util.Scanner;
 
-public class HelloException
+public class HelloException {
 
-{
+    public static void main(String[] args) {
 
-    public static void main(String[] args)
-
-    {
-
-        //try-catch
-        try
-
-        {
+        // try-catch
+        try {
             // do something
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        //try-catch-catch - order of catch blocks matters per hierachy
-        try
-        {
+        // try-catch-catch - order of catch blocks matters per hierarchy
+        try {
             // do something
-        }
-        catch (NullPointerException e)
-        {
-            e.printStackTrace();
-        }
-        catch (Exception e)
-        {
+        } catch (NullPointerException e) {
+            // handle npe
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        //try-catch-finally
-        try
-        {
+        try {
             // do something
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally
-        {
+        } finally {
             // finally do something
         }
 
-        try
-        {
+        try {
             // do something
-        }
-        finally
-        {
+        } finally {
             // do something
         }
 
         // java 7 multi-try-catch
-        try
-        {
+        try {
             // do something
-        }
-        catch (ArithmeticException | NullPointerException e)
-        {
+        } catch (ArithmeticException | NullPointerException e) {
             e.printStackTrace();
         }
 
         // try-with-resources
-        try (Scanner scanner1 = new Scanner(System.in))
-        {
+        try (Scanner scanner1 = new Scanner(System.in)) {
             // do something
         }
 
         Scanner scanner2 = null;
-        try
-        {
+        try {
             scanner2 = new Scanner(System.in);
-        }
-        finally
-        {
-            if (scanner2 != null)
-            {
+        } finally {
+            if (scanner2 != null) {
                 scanner2.close();
             }
         }
 
-        try (Scanner scanner3 = new Scanner(System.in))
-        {
+        try (Scanner scanner3 = new Scanner(System.in)) {
             // do something
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

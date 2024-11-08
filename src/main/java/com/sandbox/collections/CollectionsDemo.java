@@ -2,13 +2,13 @@ package com.sandbox.collections;
 
 import java.util.*;
 
-public class CollectionsDemo
-{
-    public static void main(String[] args)
-    {
-        Set<String> set = new LinkedHashSet<>(); // maintains order of insertion
+public class CollectionsDemo {
+
+    public static void main(String[] args) {
+
+        Set<String> set = new LinkedHashSet<>();
         Set<String> set2 = new HashSet<>();
-        Set<String> set3 = new TreeSet<>(); // sorts elements
+        Set<String> set3 = new TreeSet<>();
 
         List<String> list = new Vector<>();
 
@@ -23,6 +23,7 @@ public class CollectionsDemo
         set2.add("Howdy");
         set2.add("Hi");
         set2.add("Hello");
+        set2.add("Hi");
         set2.add("Hola");
         set2.add("There");
 
@@ -32,6 +33,7 @@ public class CollectionsDemo
         set.add("Howdy");
         set.add("Hi");
         set.add("Hello");
+        set.add("Hi");
         set.add("Hola");
         set.add("There");
 
@@ -45,6 +47,7 @@ public class CollectionsDemo
         set3.add("Howdy");
         set3.add("Hi");
         set3.add("Hello");
+        set3.add("Hi");
         set3.add("There");
         set3.add("Hola");
 

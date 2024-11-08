@@ -1,80 +1,75 @@
 package com.sandbox.search;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SearchUtilityTest {
-
-    private SearchUtility searchUtility;
-
-    @BeforeEach
-    public void setUp() {
-        searchUtility = new SearchUtility();
-    }
+class SearchUtilityTest {
 
     @Test
-    public void testBinarySearchElementFound() {
+    void testLinearSearchIntArray() {
         int[] array = {1, 2, 3, 4, 5};
-        int target = 3;
-        int expectedIndex = 2;
-        assertEquals(expectedIndex, searchUtility.binarySearch(array, target));
+        assertEquals(2, SearchUtility.linearSearch(array, 3));
+        assertEquals(-1, SearchUtility.linearSearch(array, 6));
+        assertEquals(0, SearchUtility.linearSearch(array, 1));
+        assertEquals(4, SearchUtility.linearSearch(array, 5));
     }
 
     @Test
-    public void testBinarySearchElementNotFound() {
+    void testLinearSearchObjectList() {
+        List<String> list = Arrays.asList("a", "b", "c", "d");
+        assertEquals("c", SearchUtility.linearSearch(list, "c"));
+        assertNull(SearchUtility.linearSearch(list, "e"));
+        assertEquals("a", SearchUtility.linearSearch(list, "a"));
+        assertEquals("d", SearchUtility.linearSearch(list, "d"));
+    }
+
+    @Test
+    void testLinearSearchObjectArray() {
+        Integer[] array = {1, 2, 3, 4, 5};
+        assertTrue(SearchUtility.linearSearch(array, 3));
+        assertFalse(SearchUtility.linearSearch(array, 6));
+        assertTrue(SearchUtility.linearSearch(array, 1));
+        assertTrue(SearchUtility.linearSearch(array, 5));
+    }
+
+    @Test
+    void testBinarySearchRecursive() {
         int[] array = {1, 2, 3, 4, 5};
-        int target = 6;
-        int expectedIndex = -1;
-        assertEquals(expectedIndex, searchUtility.binarySearch(array, target));
+        assertEquals(2, SearchUtility.binarySearchRecursive(array, 3));
+        assertEquals(-1, SearchUtility.binarySearchRecursive(array, 6));
+        assertEquals(0, SearchUtility.binarySearchRecursive(array, 1));
+        assertEquals(4, SearchUtility.binarySearchRecursive(array, 5));
     }
 
     @Test
-    public void testBinarySearchEmptyArray() {
-        int[] array = {};
-        int target = 1;
-        int expectedIndex = -1;
-        assertEquals(expectedIndex, searchUtility.binarySearch(array, target));
+    void testBinarySearchIterative() {
+        int[] array = {1, 2, 3, 4, 5};
+        assertEquals(2, SearchUtility.binarySearchIterative(array, 3));
+        assertEquals(-1, SearchUtility.binarySearchIterative(array, 6));
+        assertEquals(0, SearchUtility.binarySearchIterative(array, 1));
+        assertEquals(4, SearchUtility.binarySearchIterative(array, 5));
     }
 
     @Test
-    public void testBinarySearchSingleElementArrayFound() {
-        int[] array = {1};
-        int target = 1;
-        int expectedIndex = 0;
-        assertEquals(expectedIndex, searchUtility.binarySearch(array, target));
+    void testEmptyArray() {
+        int[] emptyArray = {};
+        assertEquals(-1, SearchUtility.linearSearch(emptyArray, 1));
+        assertEquals(-1, SearchUtility.binarySearchRecursive(emptyArray, 1));
+        assertEquals(-1, SearchUtility.binarySearchIterative(emptyArray, 1));
     }
 
     @Test
-    public void testBinarySearchSingleElementArrayNotFound() {
-        int[] array = {1};
-        int target = 2;
-        int expectedIndex = -1;
-        assertEquals(expectedIndex, searchUtility.binarySearch(array, target));
-    }
-
-    @Test
-    public void testBinarySearchNegativeNumbers() {
-        int[] array = {-5, -4, -3, -2, -1};
-        int target = -3;
-        int expectedIndex = 2;
-        assertEquals(expectedIndex, searchUtility.binarySearch(array, target));
-    }
-
-    @Test
-    public void testBinarySearchAllSameElements() {
-        int[] array = {1, 1, 1, 1, 1};
-        int target = 1;
-        int expectedIndex = 0; // or any valid index
-        assertTrue(searchUtility.binarySearch(array, target) >= 0);
-    }
-
-    @Test
-    public void testBinarySearchArrayWithDuplicates() {
-        int[] array = {1, 2, 2, 2, 3};
-        int target = 2;
-        int expectedIndex = 1; // or any valid index of 2
-        assertTrue(searchUtility.binarySearch(array, target) >= 1 && searchUtility.binarySearch(array, target) <= 3);
+    void testSingleElementArray() {
+        int[] singleElementArray = {1};
+        assertEquals(0, SearchUtility.linearSearch(singleElementArray, 1));
+        assertEquals(-1, SearchUtility.linearSearch(singleElementArray, 2));
+        assertEquals(0, SearchUtility.binarySearchRecursive(singleElementArray, 1));
+        assertEquals(-1, SearchUtility.binarySearchRecursive(singleElementArray, 2));
+        assertEquals(0, SearchUtility.binarySearchIterative(singleElementArray, 1));
+        assertEquals(-1, SearchUtility.binarySearchIterative(singleElementArray, 2));
     }
 }

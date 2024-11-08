@@ -1,13 +1,10 @@
 package com.sandbox.linkedlist;
 
-public class SingleDriver
-{
-    public static void main(String[] args)
-    {
+public class SingleDriver {
+
+    public static void main(String[] args) {
 
         LinkedList<String> linkedList = new SinglyLinkedList<>();
-
-        System.out.println(linkedList.contains(null));
 
         linkedList.addFirst("first");
         linkedList.addFirst("second");

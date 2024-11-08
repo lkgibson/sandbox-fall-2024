@@ -1,60 +1,15 @@
-/*package com.sandbox.comparable;
+package com.sandbox.comparable;
 
-public class Orange extends Fruit
-{
-    private String type;
-    private String color;
-    private int size;
+public class Orange extends Fruit {
 
-    public Orange(String type, String color, int size)
-    {
-        this.type = type;
-        this.color = color;
-        this.size = size;
-    }
 
-    public Orange()
-    {
-    }
-
-    public String getType()
-    {
-
-        return type;
-    }
-
-    public void setType(String type)
-    {
-
-        this.type = type;
-    }
-
-    public String getColor()
-    {
-        return color;
-    }
-
-    public void setColor(String color)
-    {
-
-        this.color = color;
-    }
-
-    public int getSize()
-    {
-
-        return size;
-    }
-
-    public void setSize(int size)
-    {
-        this.size = size;
+    public Orange(String type, String color, int size) {
+        super(type, color, size);
     }
 
     @Override
-    public String toString()
-    {
-        StringBuilder sb = new StringBuilder("Orange{");
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Orange {");
         sb.append("type='").append(type).append('\'');
         sb.append(", color='").append(color).append('\'');
         sb.append(", size=").append(size);
@@ -62,5 +17,3 @@ public class Orange extends Fruit
         return sb.toString();
     }
 }
-
- */

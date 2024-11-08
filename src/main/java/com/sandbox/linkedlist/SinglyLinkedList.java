@@ -2,62 +2,56 @@ package com.sandbox.linkedlist;
 
 import java.util.StringJoiner;
 
-public class SinglyLinkedList<E> implements LinkedList<E>
-{
+public class SinglyLinkedList<E> implements LinkedList<E> {
+
     private Node head;
     private Node tail;
 
-    public SinglyLinkedList()
-    {
+    public SinglyLinkedList() {
         head = null;
         tail = null;
     }
 
+    // O(1)
     @Override
-    public void addFirst(E element)
-    {
-        Node newNode = new Node(element, head); // 1,2
+    public void addFirst(E element) {
 
-        if (head == null)
-        {
+        Node newNode = new Node(element, head);  // 1,2
+
+        if (head == null) {
             head = newNode; // 3
             tail = head;
-        }
-        else
-        {
+        } else {
             head = newNode; // 3
         }
 
     }
 
+    // O(1)
     @Override
-    public void addLast(E element)
-    {
+    public void addLast(E element) {
+
         Node newNode = new Node(element, null); // 1
 
-        if (tail == null)
-        {
+        if (tail == null) {
             tail = newNode; // 2
             head = newNode;
-        }
-        else
-        {
+        } else {
             tail.next = newNode; // 3
             tail = newNode; // 4
         }
+
     }
 
+    // O(1)
     @Override
-    public E pollFirst()
-    {
-        E element;
+    public E pollFirst() {
 
-        if (head == null)
-        {
+        E element;
+        if (head == null) {
             element = null;
-        }
-        else
-        {
+        } else {
+
             element = head.element; // 1
 
             if (head == tail) { // one element in the list
@@ -65,90 +59,85 @@ public class SinglyLinkedList<E> implements LinkedList<E>
                 tail = null;
             } else {
                 Node next = head.next; // 3
-                head.next = null; // optional
-                head = next; //4
+                head.next = null;  // optional
+                head = next; // 4
             }
         }
         return element;
     }
 
+    // O(n)
     @Override
-    public E pollLast()
-    {
+    public E pollLast() {
+
         E element;
 
-        if (tail == null)
-        {
+        if (tail == null) {
             element = null;
-        }
-        else
-        {
+        } else {
             element = tail.element; // 1
 
-            if (head == tail)
-            { // one element in the list
+            if (head == tail) { // one element in the list
                 head = null;
                 tail = null;
-            }
-            else // more than one element in the list
-            {
+            } else { // more than one element in the list
                 Node current = head;
-                while (current.next != tail) // 2
-                {
+                while (current.next != tail) { // 2
                     current = current.next;
                 }
                 current.next = null; // 3
                 tail = current; // 4
             }
         }
+
         return element;
     }
 
+    // O(1)
     @Override
-    public E peekFirst()
-    {
+    public E peekFirst() {
+
         E returnValue = null;
-        if(head != null)
-        {
+        if(head != null) {
             returnValue = head.element;
         }
-        return head.element;
+        return returnValue;
     }
 
+    // O(1)
     @Override
-    public E peekLast()
-    {
+    public E peekLast() {
+
         E returnValue = null;
-        if(tail != null)
-        {
+        if(tail != null) {
             returnValue = tail.element;
         }
-        return tail.element;
+        return returnValue;
     }
 
+    // O(n)
     @Override
-    public void clear()
-    {
+    public void clear() {
+
         Node current = head;
-        while(current != null)
-        {
+        while (current != null) {
             Node next = current.next;
             current.next = null;
             current = next;
         }
         head = null;
         tail = null;
+
     }
 
+    // O(n)
     @Override
-    public boolean contains(E element)
-    {
+    public boolean contains(E element) {
+
         boolean found = false;
         Node current = head;
-        while(current != null)
-        {
-            if (current.element.equals(element))
-            {
+        while (current != null) {
+            if (current.element.equals(element)) {
                 found = true;
                 break;
             }
@@ -158,37 +147,36 @@ public class SinglyLinkedList<E> implements LinkedList<E>
         return found;
     }
 
+    // O(n)
     @Override
-    public int size()
-    {
+    public int size() {
+
         int counter = 0;
-        if(head != null) // list is not empty
-        {
+        if (head != null) { // list is not empty
+
+            // more than one element in the list
             Node current = head;
-            while (current != null)
-            {
+            while (current != null) {
                 counter++;
                 current = current.next;
+
             }
         }
 
         return counter;
     }
 
+    // O(mn)
     @Override
-    public String toString()
-    {
+    public String toString() {
+
         StringBuilder builder = new StringBuilder("[");
         StringJoiner joiner = new StringJoiner(", ");
-
         Node current = head;
-
-        if (current != null)
-        {
-            while (current != null)
-            {
+        if (current != null) {
+            while (current != null) {
                 joiner.add(current.element.toString());
-                current = current.next; // walking the list
+                current = current.next;  // walking the list
             }
         }
         builder.append(joiner);
@@ -197,15 +185,16 @@ public class SinglyLinkedList<E> implements LinkedList<E>
         return builder.toString();
     }
 
-    private class Node
-    {
+    private class Node {
+
         E element;
         Node next;
 
-        public Node(E element, Node next)
-        {
+        // O(1)
+        public Node(E element, Node next) {
             this.element = element;
             this.next = next;
         }
+
     }
 }
